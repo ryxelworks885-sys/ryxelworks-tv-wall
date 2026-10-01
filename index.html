@@ -677,6 +677,34 @@ html { scroll-behavior: smooth; }
 }
 </style>
 
+
+<style id="RYXELWORKS-service-card-fadein">
+/* 4つのサービスカードを1枚ずつフェードイン */
+.service-card.card-fade {
+  opacity: 0;
+  transform: translate3d(0, 35px, 0);
+  transition:
+    opacity .8s cubic-bezier(.22,1,.36,1),
+    transform .8s cubic-bezier(.22,1,.36,1);
+}
+.service-card.card-fade.card-show {
+  opacity: 1;
+  transform: translate3d(0, 0, 0);
+}
+.service-card.card-delay-1 { transition-delay: .08s; }
+.service-card.card-delay-2 { transition-delay: .16s; }
+.service-card.card-delay-3 { transition-delay: .24s; }
+
+@media (prefers-reduced-motion: reduce) {
+  .service-card.card-fade,
+  .service-card.card-fade.card-show {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}
+</style>
+
 </head><body>
 
 
@@ -775,6 +803,51 @@ html { scroll-behavior: smooth; }
     document.addEventListener("DOMContentLoaded", startFadeIn);
   } else {
     startFadeIn();
+  }
+})();
+</script>
+
+
+<script id="RYXELWORKS-service-card-fadein-js">
+(function () {
+  function initServiceCardFade() {
+    var cards = document.querySelectorAll(".service-card");
+    if (!cards.length) return;
+
+    cards.forEach(function (card, i) {
+      card.classList.add("card-fade");
+      if (i % 4 === 1) card.classList.add("card-delay-1");
+      if (i % 4 === 2) card.classList.add("card-delay-2");
+      if (i % 4 === 3) card.classList.add("card-delay-3");
+    });
+
+    if ("IntersectionObserver" in window) {
+      var observer = new IntersectionObserver(function (entries, obs) {
+        entries.forEach(function (entry) {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("card-show");
+            obs.unobserve(entry.target);
+          }
+        });
+      }, {
+        threshold: 0.18,
+        rootMargin: "0px 0px -50px 0px"
+      });
+
+      cards.forEach(function (card) {
+        observer.observe(card);
+      });
+    } else {
+      cards.forEach(function (card) {
+        card.classList.add("card-show");
+      });
+    }
+  }
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", initServiceCardFade);
+  } else {
+    initServiceCardFade();
   }
 })();
 </script>
