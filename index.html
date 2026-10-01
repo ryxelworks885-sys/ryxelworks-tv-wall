@@ -691,6 +691,109 @@ footer .line-fixed {
 }
 </style>
 
+
+<style id="RYXELWORKS-service-mobile-final">
+/* スマホ：サービスカードを自然な縦型レイアウトに戻す */
+@media (max-width: 800px) {
+  .services {
+    grid-template-columns: 1fr !important;
+    gap: 18px !important;
+  }
+
+  .service-card,
+  .service-card.card-fade,
+  .service-card.card-fade.card-show {
+    grid-template-columns: 1fr !important;
+    min-height: 0 !important;
+    width: 100% !important;
+  }
+
+  .service-card:hover {
+    transform: none !important;
+  }
+
+  .service-img {
+    min-height: 190px !important;
+    height: 190px !important;
+    width: 100% !important;
+  }
+
+  .service-img img {
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: contain !important;
+  }
+
+  .service-copy {
+    min-height: 220px !important;
+    padding: 24px 24px 46px !important;
+    justify-content: center !important;
+  }
+
+  .service-copy h3 {
+    font-size: 28px !important;
+    line-height: 1.45 !important;
+    margin: 6px 0 12px !important;
+    writing-mode: horizontal-tb !important;
+  }
+
+  .service-copy p {
+    max-width: none !important;
+    font-size: 14px !important;
+    line-height: 2 !important;
+  }
+
+  .service-arrow {
+    right: 20px !important;
+    bottom: 16px !important;
+  }
+
+  /* ヘッダーは常に固定 */
+  .clean-header {
+    position: fixed !important;
+    top: 0 !important;
+    z-index: 1000 !important;
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+    animation: none !important;
+  }
+
+  /* 最下部フッターもアニメーションさせない */
+  footer,
+  footer * {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+    animation: none !important;
+  }
+}
+</style>
+
+
+<style id="RYXELWORKS-other-card-fadein">
+/* 「こんなことも、やっています。」カード */
+.other-card.card-fade-other {
+  opacity: 0;
+  transform: translate3d(0, 35px, 0);
+  transition:
+    opacity 1.6s cubic-bezier(.22,1,.36,1),
+    transform 1.6s cubic-bezier(.22,1,.36,1);
+}
+.other-card.card-fade-other.card-show-other {
+  opacity: 1;
+  transform: translate3d(0, 0, 0);
+}
+@media (prefers-reduced-motion: reduce) {
+  .other-card.card-fade-other,
+  .other-card.card-fade-other.card-show-other {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}
+</style>
+
 </head><body>
 
 
@@ -765,6 +868,48 @@ footer .line-fixed {
     document.addEventListener("DOMContentLoaded", initServiceCardFade);
   } else {
     initServiceCardFade();
+  }
+})();
+</script>
+
+
+<script id="RYXELWORKS-other-card-fadein-js">
+(function () {
+  function initOtherCardFade() {
+    var cards = document.querySelectorAll(".other-card");
+    if (!cards.length) return;
+
+    cards.forEach(function (card) {
+      card.classList.add("card-fade-other");
+    });
+
+    if ("IntersectionObserver" in window) {
+      var observer = new IntersectionObserver(function (entries, obs) {
+        entries.forEach(function (entry) {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("card-show-other");
+            obs.unobserve(entry.target);
+          }
+        });
+      }, {
+        threshold: 0.12,
+        rootMargin: "0px 0px -40px 0px"
+      });
+
+      cards.forEach(function (card) {
+        observer.observe(card);
+      });
+    } else {
+      cards.forEach(function (card) {
+        card.classList.add("card-show-other");
+      });
+    }
+  }
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", initOtherCardFade);
+  } else {
+    initOtherCardFade();
   }
 })();
 </script>
