@@ -684,16 +684,17 @@ html { scroll-behavior: smooth; }
   opacity: 0;
   transform: translate3d(0, 35px, 0);
   transition:
-    opacity .8s cubic-bezier(.22,1,.36,1),
-    transform .8s cubic-bezier(.22,1,.36,1);
+    
+    opacity 1.6s cubic-bezier(.22,1,.36,1),
+    transform 1.6s cubic-bezier(.22,1,.36,1);
 }
 .service-card.card-fade.card-show {
   opacity: 1;
   transform: translate3d(0, 0, 0);
 }
-.service-card.card-delay-1 { transition-delay: .08s; }
-.service-card.card-delay-2 { transition-delay: .16s; }
-.service-card.card-delay-3 { transition-delay: .24s; }
+.service-card.card-delay-1 { transition-delay: .25s; }
+.service-card.card-delay-2 { transition-delay: .50s; }
+.service-card.card-delay-3 { transition-delay: .75s; }
 
 @media (prefers-reduced-motion: reduce) {
   .service-card.card-fade,
