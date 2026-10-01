@@ -647,44 +647,11 @@ body{
 .line-fixed-icon{font-size:10px;padding:3px 4px}
 @media (max-width:640px){.line-fixed{right:12px;bottom:12px;font-size:12px;padding:9px 12px}.line-add-wrap{width:100%;margin-top:8px}}</style>
 
-
-<style id="RYXELWORKS-fadein-v2">
-/* RYXELWORKS：スクロール連動フェードイン */
-html { scroll-behavior: smooth; }
-
-.fade-section {
-  opacity: 0;
-  transform: translate3d(0, 45px, 0);
-  transition: opacity 1.05s cubic-bezier(.22,1,.36,1),
-              transform 1.05s cubic-bezier(.22,1,.36,1);
-}
-.fade-section.fade-show {
-  opacity: 1;
-  transform: translate3d(0, 0, 0);
-}
-.fade-section.fade-delay-1 { transition-delay: .10s; }
-.fade-section.fade-delay-2 { transition-delay: .20s; }
-.fade-section.fade-delay-3 { transition-delay: .30s; }
-
-@media (prefers-reduced-motion: reduce) {
-  html { scroll-behavior: auto; }
-  .fade-section,
-  .fade-section.fade-show {
-    opacity: 1;
-    transform: none;
-    transition: none;
-  }
-}
-</style>
-
-
-<style id="RYXELWORKS-service-card-fadein">
-/* 4つのサービスカードを1枚ずつフェードイン */
+<style id="RYXELWORKS-service-card-fadein-final">
 .service-card.card-fade {
   opacity: 0;
   transform: translate3d(0, 35px, 0);
   transition:
-    
     opacity 1.6s cubic-bezier(.22,1,.36,1),
     transform 1.6s cubic-bezier(.22,1,.36,1);
 }
@@ -740,76 +707,14 @@ html { scroll-behavior: smooth; }
 <!-- RYXELWORKS LINE fixed CTA -->
 <a class="line-fixed" href="https://lin.ee/PcjCZ2p" target="_blank" rel="noopener" aria-label="LINEでお問い合わせ"><span class="line-fixed-icon">LINE</span><span>LINEでお問い合わせ</span></a>
 <style>
-.line-fixed{display:none}
+.line-fixed{display:none;position:fixed;opacity:1!important;transform:none!important}
 @media(max-width:800px){
   .line-fixed{position:fixed;right:14px;bottom:14px;z-index:120;display:flex;align-items:center;justify-content:center;gap:7px;padding:10px 14px;background:#06c755;color:#fff;border-radius:999px;box-shadow:0 6px 22px rgba(0,0,0,.18);font-weight:700;font-size:13px;line-height:1;text-decoration:none}
   .line-fixed-icon{display:inline-flex;align-items:center;justify-content:center;font-size:10px;font-weight:900;letter-spacing:-.5px;border:2px solid #fff;border-radius:999px;padding:3px 4px;line-height:1}
 }
 </style>
 
-
-<script id="RYXELWORKS-fadein-v2-js">
-(function () {
-  function startFadeIn() {
-    var targets = document.querySelectorAll("section, footer");
-    if (!targets.length) return;
-
-    targets.forEach(function (el, i) {
-      el.classList.add("fade-section");
-      if (i % 4 === 1) el.classList.add("fade-delay-1");
-      if (i % 4 === 2) el.classList.add("fade-delay-2");
-      if (i % 4 === 3) el.classList.add("fade-delay-3");
-    });
-
-    // 画面上部のヒーローはページ表示時にすぐフェードイン
-    var first = targets[0];
-    if (first) {
-      setTimeout(function () { first.classList.add("fade-show"); }, 120);
-    }
-
-    if ("IntersectionObserver" in window) {
-      var observer = new IntersectionObserver(function (entries, obs) {
-        entries.forEach(function (entry) {
-          if (entry.isIntersecting) {
-            entry.target.classList.add("fade-show");
-            obs.unobserve(entry.target);
-          }
-        });
-      }, {
-        threshold: 0.08,
-        rootMargin: "0px 0px -70px 0px"
-      });
-
-      targets.forEach(function (el, i) {
-        if (i !== 0) observer.observe(el);
-      });
-    } else {
-      // 古いブラウザ用フォールバック
-      function revealOnScroll() {
-        var h = window.innerHeight || document.documentElement.clientHeight;
-        targets.forEach(function (el) {
-          if (el.classList.contains("fade-show")) return;
-          var r = el.getBoundingClientRect();
-          if (r.top < h * 0.92 && r.bottom > 0) {
-            el.classList.add("fade-show");
-          }
-        });
-      }
-      window.addEventListener("scroll", revealOnScroll, {passive:true});
-      revealOnScroll();
-    }
-  }
-
-  if (document.readyState === "loading") {
-    document.addEventListener("DOMContentLoaded", startFadeIn);
-  } else {
-    startFadeIn();
-  }
-})();
-</script>
-
-
-<script id="RYXELWORKS-service-card-fadein-js">
+<script id="RYXELWORKS-service-card-fadein-final-js">
 (function () {
   function initServiceCardFade() {
     var cards = document.querySelectorAll(".service-card");
@@ -831,8 +736,8 @@ html { scroll-behavior: smooth; }
           }
         });
       }, {
-        threshold: 0.18,
-        rootMargin: "0px 0px -50px 0px"
+        threshold: 0.12,
+        rootMargin: "0px 0px -40px 0px"
       });
 
       cards.forEach(function (card) {
@@ -854,4 +759,3 @@ html { scroll-behavior: smooth; }
 </script>
 
 </body></html>
-@media(max-width:800px){.footer-inner{display:flex;flex-direction:column;align-items:flex-start;gap:14px}.footer-logo-wrap{width:150px;height:62px}.footer-inner div:last-child{margin-top:0}}
