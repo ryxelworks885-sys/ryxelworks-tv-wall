@@ -172,6 +172,60 @@ body{padding-bottom:50px}
 .type-choice p{margin:0;color:var(--muted);font-size:14px}
 @media(max-width:700px){.type-choice{grid-template-columns:1fr}.type-visual{border-radius:14px}.type-note{font-size:12px}.type-title span{display:block}.type-title{font-size:30px;line-height:1.45}}
 </style>
+
+<style id="RYXELWORKS-equipment-card">
+  .equipment-link-section{padding:72px 20px 28px;background:var(--cream,#f7f4ec)}
+  .equipment-link-wrap{max-width:1080px;margin:0 auto}
+  .equipment-link-kicker{font-size:12px;letter-spacing:.24em;font-weight:800;color:var(--gold,#b58b3f);margin-bottom:10px}
+  .equipment-link-title{margin:0 0 22px;color:var(--navy,#071f31);font-size:clamp(28px,4vw,46px);line-height:1.25;letter-spacing:.02em}
+  .equipment-link-card{display:grid;grid-template-columns:1.15fr .85fr;min-height:260px;border:1px solid var(--line,#e6dfd0);background:#fff;overflow:hidden;box-shadow:0 18px 45px rgba(7,31,49,.08);text-decoration:none;transition:transform .35s ease,box-shadow .35s ease}
+  .equipment-link-card:hover{transform:translateY(-4px);box-shadow:0 24px 55px rgba(7,31,49,.13)}
+  .equipment-link-copy{padding:42px 44px;display:flex;flex-direction:column;justify-content:center}
+  .equipment-link-label{font-size:12px;letter-spacing:.22em;font-weight:800;color:var(--gold,#b58b3f);margin-bottom:12px}
+  .equipment-link-copy h3{margin:0;color:var(--navy,#071f31);font-size:clamp(25px,3.2vw,38px);line-height:1.35}
+  .equipment-link-copy p{margin:14px 0 0;color:var(--muted,#68757e);font-size:16px}
+  .equipment-link-button{display:inline-flex;align-items:center;gap:12px;margin-top:24px;width:max-content;padding:13px 20px;background:var(--navy,#071f31);color:#fff;font-weight:800}
+  .equipment-link-button span{font-size:20px;line-height:1}
+  .equipment-link-visual{background:var(--navy,#071f31);display:flex;align-items:center;justify-content:center;position:relative;min-height:260px}
+  .equipment-link-visual::before{content:'RX';font-size:150px;font-weight:900;letter-spacing:-.08em;color:rgba(181,139,63,.16);position:absolute;right:10%;bottom:-20px}
+  .equipment-link-visual-inner{position:relative;z-index:1;text-align:center;color:#fff;padding:20px}
+  .equipment-link-visual-inner strong{display:block;font-size:22px;letter-spacing:.12em}
+  .equipment-link-visual-inner small{display:block;margin-top:8px;color:#c9d1d6;letter-spacing:.12em}
+  .equipment-link-reveal{
+    opacity:1;
+    transform:none;
+    animation:ryxelEquipmentCardIn 1.6s cubic-bezier(.22,1,.36,1) both;
+  }
+  @keyframes ryxelEquipmentCardIn{
+    from{opacity:0;transform:translateY(36px)}
+    to{opacity:1;transform:translateY(0)}
+  }
+  @media (max-width:700px){
+    .equipment-link-section{padding:58px 18px 22px}
+    .equipment-link-title{font-size:30px;margin-bottom:18px}
+    .equipment-link-card{grid-template-columns:1fr;min-height:0}
+    .equipment-link-copy{padding:30px 26px}
+    .equipment-link-copy h3{font-size:28px}
+    .equipment-link-copy p{font-size:14px;line-height:1.8}
+    .equipment-link-visual{min-height:150px}
+    .equipment-link-visual::before{font-size:100px;right:5%;bottom:-12px}
+    .equipment-link-visual-inner strong{font-size:18px}
+  }
+</style>
+
+<style id="RYXELWORKS-equipment-card-visible-fix">
+.equipment-link-section{display:block!important;visibility:visible!important}
+.equipment-link-card{display:grid!important;visibility:visible!important;opacity:1}
+@media(max-width:700px){
+  .equipment-link-card{display:flex!important;flex-direction:column!important}
+  .equipment-link-copy{display:flex!important}
+  .equipment-link-visual{display:flex!important;min-height:170px!important}
+}
+@media(prefers-reduced-motion:reduce){
+  .equipment-link-reveal{animation:none!important;opacity:1!important;transform:none!important}
+}
+</style>
+
 </head>
 <body>
 <header>
@@ -311,6 +365,29 @@ body{padding-bottom:50px}
 
 <div class="back"><a href="#top">↑ ページTOPへ</a></div>
 <a class="mobile-call" href="tel:0786009868">📞 078-600-9868　お問い合わせ</a>
+
+<section class="equipment-link-section">
+  <div class="equipment-link-wrap">
+    <div class="equipment-link-kicker">OTHER SERVICE</div>
+    <h2 class="equipment-link-title">こんなことも、やっています。</h2>
+
+    <a class="equipment-link-card equipment-link-reveal" href="index.html" aria-label="住まいの設備工事を見る">
+      <div class="equipment-link-copy">
+        <div class="equipment-link-label">HOME EQUIPMENT</div>
+        <h3>住まいの設備工事も<br>おまかせください。</h3>
+        <p>水回り・電気設備・エアコン・給排水など、暮らしに関わる設備工事。</p>
+        <span class="equipment-link-button">設備ホームページを見る <span>↗</span></span>
+      </div>
+      <div class="equipment-link-visual">
+        <div class="equipment-link-visual-inner">
+          <strong>HOME EQUIPMENT</strong>
+          <small>水回り・電気・空調・給排水</small>
+        </div>
+      </div>
+    </a>
+  </div>
+</section>
+
 </main>
 <footer>© RYXELWORKS</footer>
 
@@ -468,6 +545,28 @@ body{padding-bottom:50px}
   } else {
     initScrollAnimation();
   }
+})();
+</script>
+
+
+<script id="RYXELWORKS-equipment-card-animation">
+(function(){
+  const targets = document.querySelectorAll('.equipment-link-reveal');
+  if (!targets.length) return;
+  const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (reduced || !('IntersectionObserver' in window)) {
+    targets.forEach(el => el.classList.add('is-visible'));
+    return;
+  }
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('is-visible');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, {threshold:0.12, rootMargin:'0px 0px -7% 0px'});
+  targets.forEach(el => observer.observe(el));
 })();
 </script>
 
